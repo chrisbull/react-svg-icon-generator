@@ -18,47 +18,31 @@ export function cleanupName(name) {
 }
 
 export function cleanupSvg(svg, keepFillColor, keepStrokeColor) {
-  const cleanedSvg = _basicCleanup(svg)
+  let cleanedSvg = _basicCleanup(svg)
     .replace(/viewBox/, 'height={height || size} width={width || size} onClick={onClick} style={style} viewBox');
 
   if (!keepFillColor) {
-    cleanedSvg
-      .replace(/fill="#?\w+"/g, '')
-      .replace(/\<Path/g, '<Path fill={color}')
-      .replace(/\s{2,}/g, ' ')
-      .replace(/ \>/g, '>');
+    cleanedSvg = cleanedSvg.replace(/fill="#?\w+"/g, 'fill={color}');
   }
 
   if (!keepStrokeColor) {
-    cleanedSvg
-      .replace(/stroke="#?\w+"/g, '')
-      .replace(/\<Path/g, '<Path stroke={color}')
-      .replace(/\s{2,}/g, ' ')
-      .replace(/ \>/g, '>');
+    cleanedSvg = cleanedSvg.replace(/stroke="#?\w+"/g, 'stroke={color}');
   }
 
   return cleanedSvg;
 }
 
 export function cleanupNativeSvg(svg, keepFillColor, keepStrokeColor) {
-  const cleanedSvg = _basicCleanup(svg)
+  let cleanedSvg = _basicCleanup(svg)
     .replace(/viewBox/, 'height={height || size} width={width || size} style={style} viewBox')
     .replace(/\<[a-z]|\<\/[a-z]/g, (match) => match.toUpperCase());
 
   if (!keepFillColor) {
-    cleanedSvg
-      .replace(/fill="#?\w+"/g, '')
-      .replace(/\<Path/g, '<Path fill={color}')
-      .replace(/\s{2,}/g, ' ')
-      .replace(/ \>/g, '>');
+    cleanedSvg = cleanedSvg.replace(/fill="#?\w+"/g, 'fill={color}');
   }
 
   if (!keepStrokeColor) {
-    cleanedSvg
-      .replace(/stroke="#?\w+"/g, '')
-      .replace(/\<Path/g, '<Path stroke={color}')
-      .replace(/\s{2,}/g, ' ')
-      .replace(/ \>/g, '>');
+    cleanedSvg = cleanedSvg.replace(/stroke="#?\w+"/g, 'stroke={color}');
   }
 
   return cleanedSvg;
