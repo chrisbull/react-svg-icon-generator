@@ -22,11 +22,11 @@ export function cleanupSvg(svg, keepFillColor, keepStrokeColor) {
     .replace(/viewBox/, 'height={height || size} width={width || size} onClick={onClick} style={style} viewBox');
 
   if (!keepFillColor) {
-    cleanedSvg = cleanedSvg.replace(/fill="#?\w+"/g, 'fill={color}');
+    cleanedSvg = cleanedSvg.replace(/fill="#\w+"/g, 'fill={color}');
   }
 
   if (!keepStrokeColor) {
-    cleanedSvg = cleanedSvg.replace(/stroke="#?\w+"/g, 'stroke={color}');
+    cleanedSvg = cleanedSvg.replace(/stroke="#\w+"/g, 'stroke={color}');
   }
 
   return cleanedSvg;
@@ -38,11 +38,11 @@ export function cleanupNativeSvg(svg, keepFillColor, keepStrokeColor) {
     .replace(/\<[a-z]|\<\/[a-z]/g, (match) => match.toUpperCase());
 
   if (!keepFillColor) {
-    cleanedSvg = cleanedSvg.replace(/fill="#?\w+"/g, 'fill={color}');
+    cleanedSvg = cleanedSvg.replace(/fill="#\w+"/g, 'fill={color}');
   }
 
   if (!keepStrokeColor) {
-    cleanedSvg = cleanedSvg.replace(/stroke="#?\w+"/g, 'stroke={color}');
+    cleanedSvg = cleanedSvg.replace(/stroke="#\w+"/g, 'stroke={color}');
   }
 
   return cleanedSvg;
