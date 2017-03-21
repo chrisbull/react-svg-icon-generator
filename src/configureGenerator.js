@@ -43,7 +43,7 @@ export default function configureGenerator(config) {
       const icons = results.map(result => {
         return {
           name: cleanupName(result.name),
-          svg: cleanupHelper(result.svg.data, config.keepFillColor)
+          svg: cleanupHelper(result.svg.data, config.keepFillColor, config.keepStrokeColor)
         };
       }).sort((a, b) => a.name.localeCompare(b.name));
 

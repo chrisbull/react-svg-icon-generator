@@ -17,29 +17,49 @@ export function cleanupName(name) {
   return name.replace(/u[A-Z0-9]{4}-/, '');
 }
 
-export function cleanupSvg(svg, keepFillColor) {
+export function cleanupSvg(svg, keepFillColor, keepStrokeColor) {
   const cleanedSvg = _basicCleanup(svg)
     .replace(/viewBox/, 'height={height || size} width={width || size} onClick={onClick} style={style} viewBox');
 
-  return keepFillColor
-    ? cleanedSvg
-    : cleanedSvg
-      .replace(/fill="#?\w+"/g, '')
-      .replace(/viewBox/, 'fill={color} viewBox')
-      .replace(/\s{2,}/g, ' ')
-      .replace(/ \>/g, '>');
-}
-
-export function cleanupNativeSvg(svg, keepFillColor) {
-  const cleanedSvg = _basicCleanup(svg)
-    .replace(/viewBox/, 'height={height || size} width={width || size} style={style} viewBox')
-    .replace(/\<[a-z]|\<\/[a-z]/g, (match) => match.toUpperCase());
-
-  return keepFillColor
-    ? cleanedSvg
-    : cleanedSvg
+  if (!keepFillColor) {
+    cleanedSvg
       .replace(/fill="#?\w+"/g, '')
       .replace(/\<Path/g, '<Path fill={color}')
       .replace(/\s{2,}/g, ' ')
       .replace(/ \>/g, '>');
+  }
+
+  if (!keepStrokeColor) {
+    cleanedSvg
+      .replace(/stroke="#?\w+"/g, '')
+      .replace(/\<Path/g, '<Path stroke={color}')
+      .replace(/\s{2,}/g, ' ')
+      .replace(/ \>/g, '>');
+  }
+
+  return cleanedSvg;
+}
+
+export function cleanupNativeSvg(svg, keepFillColor, keepStrokeColor) {
+  const cleanedSvg = _basicCleanup(svg)
+    .replace(/viewBox/, 'height={height || size} width={width || size} style={style} viewBox')
+    .replace(/\<[a-z]|\<\/[a-z]/g, (match) => match.toUpperCase());
+
+  if (!keepFillColor) {
+    cleanedSvg
+      .replace(/fill="#?\w+"/g, '')
+      .replace(/\<Path/g, '<Path fill={color}')
+      .replace(/\s{2,}/g, ' ')
+      .replace(/ \>/g, '>');
+  }
+
+  if (!keepStrokeColor) {
+    cleanedSvg
+      .replace(/stroke="#?\w+"/g, '')
+      .replace(/\<Path/g, '<Path stroke={color}')
+      .replace(/\s{2,}/g, ' ')
+      .replace(/ \>/g, '>');
+  }
+
+  return cleanedSvg;
 }
