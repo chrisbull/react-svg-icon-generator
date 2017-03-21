@@ -42,7 +42,7 @@
     "eslint-config-airbnb": "0.0.6",
     "eslint-plugin-react": "^2.3.0",
     "expect": "^1.6.0",
-    "gulp": ">=3",
+    "gulp": "^3.9.1",
     "isparta": "^3.0.3",
     "mocha": "^2.2.5",
     "rimraf": "^2.3.4",
